@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>List Car</h3>
+<a th:href="@{/car/create}">Create New Car</a>
+<table id="cars">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Producer</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c,cStatus : ${cars}">
+        <td th:text="${cStatus.count}"></td>
+        <td th:text="${c.code}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.price}"></td>
+        <td th:text="${c.producer}"></td>
+        <td th:if="${c.getType()}">
+            <span th:text="${c.getType().getName()}"></span>
+        </td>
+        <td th:unless="${c.getType()}">
+            <span>Null</span>
+        </td>
+        <td><a th:href="@{/car/update/{id}(id=${c.getId()})}">Edit</a></td>
+        <td><a th:href="@{/car/delete/{id}(id=${c.getId()})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
